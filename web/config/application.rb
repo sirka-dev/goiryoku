@@ -30,6 +30,8 @@ module App
     config.generators do |g|
       g.stylesheets false
       g.javascripts false
+      g.jbuilder false
+      g.helper false
       g.system_tests nil
       g.template_engine :slim
     end
