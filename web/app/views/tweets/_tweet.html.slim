@@ -1,0 +1,11 @@
+.card
+  .card-header
+    = "id : #{tweet.id}"
+  .card-body
+    .card-text
+      = tweet.attrs[:user][:id]
+      = tweet.attrs[:user][:name]
+      br
+      = tweet.attrs[:full_text] || tweet.text
+  .card-footer
+    = tweet.created_at.to_s
