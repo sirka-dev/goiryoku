@@ -11,6 +11,7 @@ services:
       - '3000:3000'
     volumes:
       - ./web:/app
+      - bundle:/usr/local/bundle
     depends_on:
       - db
     tty: true
@@ -24,3 +25,6 @@ services:
       - '15432:5432'
     volumes:
       - ./db/data:/var/lib/postgresql/data
+volumes:
+  bundle:
+    driver: local
