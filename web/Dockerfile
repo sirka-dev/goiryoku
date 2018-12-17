@@ -19,9 +19,27 @@ RUN apk upgrade --no-cache && \
       build-base \
       libxml2-dev \
       libxslt-dev \
-      postgresql-dev && \
+      postgresql-dev \
+      git \
+      openssl \
+      curl \
+      sudo && \
+    # bundle install
     gem install bundler --no-document && \
     bundle install -j4 && \
-    apk del build-dependencies
+    # install mecab
+    cd /tmp && \
+    git clone --depth 1 https://github.com/taku910/mecab.git && \
+    cd /tmp/mecab/mecab && \
+    ./configure --enable-utf8-only --with-charset=utf8 && \
+    make -j ${CPUCOUNT} && \
+    make install && \
+    # intall neologd
+    cd /tmp && \
+    git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git && \
+    mecab-ipadic-neologd/bin/install-mecab-ipadic-neologd -n -y && \
+    # clean up
+    apk del build-dependencies && \
+    rm -rf /tmp/mecab*
 
 COPY . $APP_ROOT
