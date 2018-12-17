@@ -11,10 +11,14 @@ class TweetsController < ApplicationController
   end
 
   def timeline
+    mecab = Natto::MeCab.new(dicdir: '/usr/local/lib/mecab/dic/mecab-ipadic-neologd')
+
     timelines = @client.list_timeline('sirka_p', 'アイマス情報源')
+    @wakachi = []
     timelines.each do |t|
       tweet = Tweet.new(tweet_id: t.id, user_id: t.attrs[:user][:id], text: t.text || t.attrs[:full_text])
       tweet.save
+      @wakachi.push mecab.parse(t.text || t.attrs[:full_text])
     end
     @tweets = timelines
   end

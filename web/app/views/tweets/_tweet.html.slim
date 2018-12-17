@@ -7,5 +7,8 @@
       = tweet.attrs[:user][:name]
       br
       = tweet.attrs[:full_text] || tweet.text
+      br
+      = wakachi
+
   .card-footer
     = tweet.created_at.to_s
