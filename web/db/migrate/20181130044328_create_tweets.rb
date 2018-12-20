@@ -1,9 +1,9 @@
 class CreateTweets < ActiveRecord::Migration[5.2]
   def change
     create_table :tweets do |t|
-      t.string :tweet_id
-      t.string :user_id
+      t.string :tweet_id, index: { unique: true }
       t.text :text
+      t.datetime :tweeted_at
 
       t.timestamps
     end

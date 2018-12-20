@@ -35,5 +35,7 @@ module App
       g.system_tests nil
       g.template_engine :slim
     end
+
+    config.active_job.queue_adapter = :delayed_job
   end
 end
