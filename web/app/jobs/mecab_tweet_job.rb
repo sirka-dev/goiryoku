@@ -6,26 +6,30 @@ class MecabTweetJob < ApplicationJob
 
   def perform(*args)
     mecab = Natto::MeCab.new(dicdir: '/usr/local/lib/mecab/dic/mecab-ipadic-neologd')
-    type_total = Hash.new(0)
-    length_total = 0
 
     csv_data = CSV.read("#{Rails.root}/public/tweet.csv")
     csv_data.take(10).each do |data|
       next if data[2] =~ /^(@|RT )/
 
-      # tweet = Tweet.new(tweet_id: data[0], tweeted_at: DateTime.strptime(data[1]+' +09:00', '%y%m%d %H%M%S %z'), text: data[2])
-      # tweet.save
+      text = normalize_neologd(data[2])
+      tweet = Tweet.new(tweet_id: data[0], tweeted_at: DateTime.strptime(data[1]+' +09:00', '%y%m%d %H%M%S %z'), text: text, length: text.length)
 
-      tweet = normalize_neologd(data[2])
-      length_total += tweet.length
-
-      hash = Hash.new(0)
-      mecab.enum_parse(tweet).each do |node|
+      mecab.enum_parse(text).each do |node|
         break if node.is_eos?
 
-        hash[node.feature.split(',')[0]] += 1
-        type_total[node.feature.split(',')[0]] += 1
+        case node.feature.split(',')[0]
+        when '動詞'   then tweet.verb += 1
+        when '形容詞' then tweet.adjective += 1
+        when '名詞'   then tweet.noun += 1
+        when '連体詞' then tweet.pre_noun += 1
+        when '副詞'   then tweet.adverb += 1
+        when '接続詞' then tweet.conj += 1
+        when '記号'   then tweet.symbol += 1
+        else               tweet.other += 1
+        end
       end
+
+      tweet.save
     end
   end
 
