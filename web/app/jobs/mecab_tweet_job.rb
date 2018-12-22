@@ -8,7 +8,7 @@ class MecabTweetJob < ApplicationJob
     mecab = Natto::MeCab.new(dicdir: '/usr/local/lib/mecab/dic/mecab-ipadic-neologd')
 
     csv_data = CSV.read("#{Rails.root}/public/tweet.csv")
-    csv_data.take(10).each do |data|
+    csv_data.take(1000).each do |data|
       next if data[2] =~ /^(@|RT )/
 
       text = normalize_neologd(data[2])

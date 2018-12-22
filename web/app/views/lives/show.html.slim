@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @live.name
+p
+  strong Start:
+  = @live.start
+p
+  strong End:
+  = @live.end
+
+=> link_to 'Edit', edit_live_path(@live)
+'|
+=< link_to 'Back', lives_path

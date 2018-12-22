@@ -1,0 +1,25 @@
+h1 Listing lives
+
+table.table
+  thead
+    tr
+      th ライブ名
+      th 開催日 開始
+      th 開催日 終了
+      th
+      th
+      th
+
+  tbody
+    - @lives.each do |live|
+      tr
+        td = live.name
+        td = live.start
+        td = live.end
+        td = link_to 'Show', live
+        td = link_to 'Edit', edit_life_path(live)
+        td = link_to 'Destroy', live, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Live', new_life_path

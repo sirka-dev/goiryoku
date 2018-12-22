@@ -1,0 +1,18 @@
+= form_for @live do |f|
+  - if @live.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@live.errors.count, "error")} prohibited this live from being saved:"
+      ul
+        - @live.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :start
+    = f.date_select :start
+  .field
+    = f.label :end
+    = f.date_select :end
+  .actions = f.submit

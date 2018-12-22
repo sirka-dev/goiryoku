@@ -7,6 +7,12 @@ class TweetsController < ApplicationController
     @tweets = Tweet.all
   end
 
+  def goiryoku
+    live = Live.first
+    @tweet_wartime = Tweet.where(tweeted_at: live.start..live.end)
+    @tweet_peacetime = Tweet.where.not(id: @tweet_wartime.ids)
+  end
+
   def timeline
     mecab = Natto::MeCab.new(dicdir: '/usr/local/lib/mecab/dic/mecab-ipadic-neologd')
 
