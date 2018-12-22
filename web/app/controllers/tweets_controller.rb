@@ -8,8 +8,7 @@ class TweetsController < ApplicationController
   end
 
   def goiryoku
-    live = Live.first
-    @tweet_wartime = Tweet.where(tweeted_at: live.start..live.end)
+    @tweet_wartime = Tweet.where(tweeted_at: Live.all.map { |live| live.start..live.end })
     @tweet_peacetime = Tweet.where.not(id: @tweet_wartime.ids)
   end
 
