@@ -4,7 +4,7 @@ class LivesController < ApplicationController
   # GET /lives
   # GET /lives.json
   def index
-    @lives = Live.all
+    @lives = Live.all.order(:start)
   end
 
   # GET /lives/1
