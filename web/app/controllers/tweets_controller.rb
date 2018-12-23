@@ -1,15 +1,18 @@
 # frozen_string_literal: true
 
 class TweetsController < ApplicationController
-  before_action :set_client, only: %i[index timeline]
+  before_action :set_client, only: [:index, :timeline]
 
   def index
     @tweets = Tweet.all
   end
 
   def goiryoku
-    @tweet_wartime = Tweet.where(tweeted_at: Live.all.map { |live| live.start..live.end })
-    @tweet_peacetime = Tweet.where.not(id: @tweet_wartime.ids)
+    tweet_wartime = Tweet.where(tweeted_at: Live.all.map { |live| live.start..live.end }).select(Tweet::WORD_CLASS)
+    @goiryoku_wartime = calc(tweet_wartime)
+
+    tweet_peacetime = Tweet.where.not(id: tweet_wartime.ids).select(Tweet::WORD_CLASS)
+    @goiryoku_peacetime = calc(tweet_peacetime)
   end
 
   def timeline
@@ -28,6 +31,8 @@ class TweetsController < ApplicationController
     @tweets = timelines
   end
 
+  private
+
   def set_client
     @client = Twitter::REST::Client.new do |config|
       config.consumer_key        = ENV['TWITTER_CONSUMER_KEY']
@@ -35,5 +40,15 @@ class TweetsController < ApplicationController
       config.access_token        = ENV['TWITTER_ACCESS_TOKEN']
       config.access_token_secret = ENV['TWITTER_ACCESS_TOKEN_SECRET']
     end
+  end
+
+  def calc(tweets)
+    goiryoku = {}
+    Tweet::WORD_CLASS.each do |column|
+      sum = tweets.sum(column)
+      goiryoku[column] = { average: (sum / tweets.size.to_f).round(2), sum: sum, count: tweets.size }
+    end
+
+    goiryoku
   end
 end

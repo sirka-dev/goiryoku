@@ -1,7 +1,17 @@
-h1 Tweets#goiryoku
+h1 語彙力
 
-h3 ライブ後
-= render partial: 'table', locals: { tweets: @tweet_wartime }
-
-h3 日常
-= render partial: 'table', locals: { tweets: @tweet_peacetime }
+table.table
+  thead
+    th 品詞名
+    th ライブ平均
+    th ライブ合計
+    th 日常平均
+    th 日常合計
+  tbody
+    - Tweet::WORD_CLASS.each do |word|
+      tr
+        td = word
+        td = @goiryoku_wartime[word][:average]
+        td = @goiryoku_wartime[word][:sum]
+        td = @goiryoku_peacetime[word][:average]
+        td = @goiryoku_peacetime[word][:sum]
