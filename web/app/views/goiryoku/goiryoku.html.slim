@@ -6,19 +6,19 @@ p = "日常つぶやき数 : #{@goiryoku_peacetime[:count]}"
 table.table
   thead
     th 品詞名
-    th ライブ平均
-    / th ライブ合計
     th 日常平均
     / th 日常合計
-    th ライブ中 増減
+    th ライブ後平均
+    / th ライブ合計
+    th ライブ後増減
   tbody
     - Goiryoku::WORD_CLASS.each do |word|
       tr
         td = I18n.t(word)
-        td = @goiryoku_wartime[word][:average]
-        / td = @goiryoku_wartime[word][:sum]
         td = @goiryoku_peacetime[word][:average]
         / td = @goiryoku_peacetime[word][:sum]
+        td = @goiryoku_wartime[word][:average]
+        / td = @goiryoku_wartime[word][:sum]
         - diff = @goiryoku_wartime[word][:average] - @goiryoku_peacetime[word][:average]
         - klass = diff > 0 ? "text-success" : "text-danger"
         td class=klass = "#{diff.round(2)}"
