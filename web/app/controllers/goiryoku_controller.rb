@@ -6,6 +6,8 @@ class GoiryokuController < ApplicationController
   def goiryoku
     @goiryoku_wartime = calc(Goiryoku.wartime)
     @goiryoku_peacetime = calc(Goiryoku.peacetime)
+    @tuyoi = Tweet.tuyoi(3)
+    @yowai = Tweet.yowai(3)
   end
 
   private

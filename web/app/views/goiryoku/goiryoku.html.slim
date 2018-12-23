@@ -5,9 +5,9 @@ h1 語彙力低下ちぇっく
 - else
   strong.text-success 語彙力は低下していません！
 br
-= "ライブ中つぶやき数 : #{@goiryoku_wartime[:count]}"
+= "ライブ後のつぶやき数 : #{@goiryoku_wartime[:count]}"
 |  / 
-= "日常つぶやき数 : #{@goiryoku_peacetime[:count]}"
+= "日常のつぶやき数 : #{@goiryoku_peacetime[:count]}"
 
 table.table
   thead
@@ -28,3 +28,23 @@ table.table
         - diff = @goiryoku_wartime[word][:average] - @goiryoku_peacetime[word][:average]
         - klass = diff > 0 ? "text-success" : "text-danger"
         td class=klass = "#{diff.round(2)}"
+
+.card
+  .card-header
+    | ライブ後のつよいつぶやき
+  ul.list-group
+    - @tuyoi.each do |tweet|
+      li.list-group-item
+        = tweet.tweeted_at
+        br
+        = tweet.text
+
+.card
+  .card-header
+    | ライブ後のよわいつぶやき
+  ul.list-group
+    - @yowai.each do |tweet|
+      li.list-group-item
+        = tweet.tweeted_at
+        br
+        = tweet.text
