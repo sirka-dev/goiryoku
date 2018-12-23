@@ -9,7 +9,7 @@ class TweetsController < ApplicationController
 
   def csv_parse
     MecabTweetJob.perform_later
-    flash.notice = 'CSVを開始しました。実行経過はコンソールを見てね。'
+    flash.notice = 'CSVの取り込みを開始しました'
     redirect_to root_path
   end
 

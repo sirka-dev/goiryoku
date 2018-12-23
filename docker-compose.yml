@@ -3,7 +3,7 @@ version: '3'
 services:
   web:
     build: ./web
-    command: bash -c "bin/rails s -b 0.0.0.0 -p 3000 && bin/rails jobs:work"
+    command: bash -c "bin/delayed_job start && bin/rails s -b 0.0.0.0 -p 3000"
     env_file: ./web/.env
     environment:
       RAILS_MAX_THREADS: 5
