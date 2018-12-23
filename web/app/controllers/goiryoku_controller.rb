@@ -1,5 +1,9 @@
 class GoiryokuController < ApplicationController
   def index
+    # nothing
+  end
+
+  def goiryoku
     tweet_wartime = Tweet.where(tweeted_at: Live.all.map { |live| live.start + 18.hours..live.end + 26.hours }).select(Goiryoku::WORD_CLASS)
     @goiryoku_wartime = calc(tweet_wartime)
 
