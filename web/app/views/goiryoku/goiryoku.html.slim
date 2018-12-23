@@ -1,7 +1,13 @@
 h1 語彙力低下ちぇっく
 
-p = "ライブ中つぶやき数 : #{@goiryoku_wartime[:count]}"
-p = "日常つぶやき数 : #{@goiryoku_peacetime[:count]}"
+- if @goiryoku_wartime[:word_total][:average] < @goiryoku_peacetime[:word_total][:average]
+  strong.text-danger 恐らく語彙力が低下しています...
+- else
+  strong.text-success 語彙力は低下していません！
+br
+= "ライブ中つぶやき数 : #{@goiryoku_wartime[:count]}"
+| / 
+= "日常つぶやき数 : #{@goiryoku_peacetime[:count]}"
 
 table.table
   thead
