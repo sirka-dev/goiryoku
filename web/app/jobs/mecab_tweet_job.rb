@@ -29,6 +29,8 @@ class MecabTweetJob < ApplicationJob
         when '記号'   then tweet.symbol += 1
         else               tweet.other += 1
         end
+
+        tweet.word_total += 1
       end
 
       tweet.save

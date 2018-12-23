@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_22_073631) do
+ActiveRecord::Schema.define(version: 2018_12_23_060449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2018_12_22_073631) do
     t.integer "conj", default: 0
     t.integer "symbol", default: 0
     t.integer "other", default: 0
+    t.integer "word_total", default: 0
     t.index ["tweet_id"], name: "index_tweets_on_tweet_id", unique: true
   end
 

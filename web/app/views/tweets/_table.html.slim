@@ -13,6 +13,7 @@ table.table
       th 接続詞
       th 記号
       th その他
+      th 品詞合計
   tbody
     - tweets.each do |tweet|
       tr
@@ -28,3 +29,4 @@ table.table
         td = tweet.conj
         td = tweet.symbol
         td = tweet.other
+        td = tweet.word_total
