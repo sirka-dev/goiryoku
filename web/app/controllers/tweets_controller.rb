@@ -7,14 +7,6 @@ class TweetsController < ApplicationController
     @tweets = Tweet.all
   end
 
-  def goiryoku
-    tweet_wartime = Tweet.where(tweeted_at: Live.all.map { |live| live.start + 18.hours..live.end + 26.hours }).select(Tweet::WORD_CLASS)
-    @goiryoku_wartime = calc(tweet_wartime)
-
-    tweet_peacetime = Tweet.where.not(id: tweet_wartime.ids).select(Tweet::WORD_CLASS)
-    @goiryoku_peacetime = calc(tweet_peacetime)
-  end
-
   def timeline
     mecab = Natto::MeCab.new(dicdir: '/usr/local/lib/mecab/dic/mecab-ipadic-neologd')
 
@@ -40,15 +32,5 @@ class TweetsController < ApplicationController
       config.access_token        = ENV['TWITTER_ACCESS_TOKEN']
       config.access_token_secret = ENV['TWITTER_ACCESS_TOKEN_SECRET']
     end
-  end
-
-  def calc(tweets)
-    goiryoku = { count: tweets.size }
-    Tweet::WORD_CLASS.each do |column|
-      sum = tweets.sum(column)
-      goiryoku[column] = { average: (sum / tweets.size.to_f).round(2), sum: sum }
-    end
-
-    goiryoku
   end
 end

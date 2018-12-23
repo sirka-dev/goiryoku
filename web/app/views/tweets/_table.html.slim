@@ -28,14 +28,3 @@ table.table
         td = tweet.conj
         td = tweet.symbol
         td = tweet.other
-    tr
-      td colspan="3" 合計
-      td = "平均#{tweets.sum(:length)/tweets.count} (#{tweets.sum(:length)}/#{tweets.count})"
-      td = tweets.sum(:verb)
-      td = tweets.sum(:adjective)
-      td = tweets.sum(:noun)
-      td = tweets.sum(:pre_noun)
-      td = tweets.sum(:adverb)
-      td = tweets.sum(:conj)
-      td = tweets.sum(:symbol)
-      td = tweets.sum(:other)

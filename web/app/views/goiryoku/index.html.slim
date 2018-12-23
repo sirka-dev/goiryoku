@@ -1,4 +1,4 @@
-h1 語彙力
+h1 語彙力低下ちぇっく
 
 p = "ライブ中つぶやき数 : #{@goiryoku_wartime[:count]}"
 p = "日常つぶやき数 : #{@goiryoku_peacetime[:count]}"
@@ -12,7 +12,7 @@ table.table
     / th 日常合計
     th ライブ中 増減
   tbody
-    - Tweet::WORD_CLASS.each do |word|
+    - Goiryoku::WORD_CLASS.each do |word|
       tr
         td = I18n.t(word)
         td = @goiryoku_wartime[word][:average]
