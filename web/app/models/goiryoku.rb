@@ -1,6 +1,6 @@
 class Goiryoku
   include ActiveModel::Model
-  WORD_CLASS = [:word_total, :verb, :adjective, :noun, :pre_noun, :adverb, :conj, :symbol, :other].freeze
+  WORD_CLASS = [:word_total, :length, :verb, :adjective, :noun, :pre_noun, :adverb, :conj, :symbol, :other].freeze
 
   def self.wartime
     Tweet.wartime.select(WORD_CLASS)

@@ -6,6 +6,7 @@ table.table
       th ライブ名
       th 開催日 開始
       th 開催日 終了
+      th 日数
       th
       th
       th
@@ -13,9 +14,10 @@ table.table
   tbody
     - @lives.each do |live|
       tr
-        td = live.name
+        td = "#{live.category} #{live.name}"
         td = live.start
         td = live.end
+        td = "#{(live.end - live.start).to_i + 1}日間"
         td = link_to 'Show', live
         td = link_to 'Edit', edit_life_path(live)
         td = link_to 'Destroy', live, data: { confirm: 'Are you sure?' }, method: :delete

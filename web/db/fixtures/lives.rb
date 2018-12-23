@@ -1,55 +1,28 @@
-Live.seed do |l|
-  l.id = 1
-  l.name = 'シンデレラ 6th 名古屋'
-  l.start = '2018-12-01'
-  l.end = '2018-12-02'
-end
-
-Live.seed do |l|
-  l.id = 2
-  l.name = 'シンデレラ 5th 宮城'
-  l.start = '2017-05-13'
-  l.end = '2017-05-14'
-end
-
-Live.seed do |l|
-  l.id = 3
-  l.name = 'シンデレラ 5th 石川'
-  l.start = '2017-05-27'
-  l.end = '2017-05-28'
-end
-
-Live.seed do |l|
-  l.id = 4
-  l.name = 'シンデレラ 5th 大阪'
-  l.start = '2017-06-09'
-  l.end = '2017-06-10'
-end
-
-Live.seed do |l|
-  l.id = 5
-  l.name = 'シンデレラ 5th 静岡'
-  l.start = '2017-06-24'
-  l.end = '2017-06-25'
-end
-
-Live.seed do |l|
-  l.id = 6
-  l.name = 'シンデレラ 5th 幕張'
-  l.start = '2017-07-08'
-  l.end = '2017-07-09'
-end
-
-Live.seed do |l|
-  l.id = 7
-  l.name = 'シンデレラ 5th 福岡'
-  l.start = '2017-07-29'
-  l.end = '2017-07-30'
-end
-
-Live.seed do |l|
-  l.id = 8
-  l.name = 'シンデレラ 5th SSA'
-  l.start = '2017-08-12'
-  l.end = '2017-08-13'
-end
+Live.seed(:id,
+  { id: 1,  category: "シンデレラ", name: '6th 名古屋',  start: '2018-12-01', end: '2018-12-02' },
+  { id: 2,  category: "シンデレラ", name: "5th 宮城",    start: "2017-05-13", end: "2017-05-14" },
+  { id: 3,  category: "シンデレラ", name: "5th 石川",    start: "2017-05-27", end: "2017-05-28" },
+  { id: 4,  category: "シンデレラ", name: "5th 大阪",    start: "2017-06-09", end: "2017-06-10" },
+  { id: 5,  category: "シンデレラ", name: "5th 静岡",    start: "2017-06-24", end: "2017-06-25" },
+  { id: 6,  category: "シンデレラ", name: "5th 幕張",    start: "2017-07-08", end: "2017-07-09" },
+  { id: 7,  category: "シンデレラ", name: "5th 福岡",    start: "2017-07-29", end: "2017-07-30" },
+  { id: 8,  category: "シンデレラ", name: "5th SSA",     start: "2017-08-12", end: "2017-08-13" },
+  { id: 9,  category: "シンデレラ", name: "4th 神戸",    start: "2016-09-03", end: "2016-09-04" },
+  { id: 10, category: "シンデレラ", name: "4th SSA",     start: "2016-10-15", end: "2016-10-16" },
+  { id: 11, category: "ミリオン",   name: "3rd 名古屋",  start: "2016-01-31", end: "2016-01-31" },
+  { id: 12, category: "ミリオン",   name: "3rd 仙台",    start: "2016-02-07", end: "2016-02-07" },
+  { id: 13, category: "ミリオン",   name: "3rd 大阪",    start: "2016-03-12", end: "2016-03-13" },
+  { id: 14, category: "ミリオン",   name: "3rd 福岡",    start: "2016-04-03", end: "2016-04-03" },
+  { id: 15, category: "ミリオン",   name: "3rd 幕張",    start: "2016-04-16", end: "2016-04-17" },
+  { id: 16, category: "ミリオン",   name: "3rd 名古屋",  start: "2016-01-31", end: "2016-01-31" },
+  { id: 17, category: "シンデレラ", name: "サマフェス東京",  start: "2015-08-02", end: "2015-08-02" },
+  { id: 18, category: "シンデレラ", name: "サマフェス大阪",  start: "2015-08-23", end: "2015-08-23" },
+  { id: 19, category: "合同",       name: "M@STERS OF IDOL WORLD!!2015",    start: "2015-07-18", end: "2015-07-19" },
+  { id: 20, category: "ミリオン",   name: "2nd",         start: "2015-04-04", end: "2015-04-05" },
+  { id: 21, category: "シンデレラ", name: "2nd 大阪",    start: "2014-08-02", end: "2014-08-03" },
+  { id: 22, category: "シンデレラ", name: "2nd 名古屋",  start: "2014-08-16", end: "2014-08-17" },
+  { id: 23, category: "シンデレラ", name: "2nd 東京",    start: "2014-10-04", end: "2014-10-05" },
+  { id: 24, category: "ミリオン",   name: "1st",         start: "2014-06-07", end: "2014-06-08" },
+  # { id: 25, category: "シンデレラ", name: "1st",         start: "2014-04-05", end: "2014-04-06" },
+  { id: 26, category: "765",        name: "9th 東京Day2",start: "2014-10-05", end: "2014-10-05" },
+  )

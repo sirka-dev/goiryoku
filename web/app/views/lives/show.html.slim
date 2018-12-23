@@ -1,6 +1,9 @@
 p#notice = notice
 
 p
+  strong Category:
+  = @live.category
+p
   strong Name:
   = @live.name
 p
@@ -10,6 +13,6 @@ p
   strong End:
   = @live.end
 
-=> link_to 'Edit', edit_live_path(@live)
+=> link_to 'Edit', edit_life_path(@live)
 '|
 =< link_to 'Back', lives_path
