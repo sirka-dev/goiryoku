@@ -7,6 +7,12 @@ class TweetsController < ApplicationController
     @tweets = Tweet.all
   end
 
+  def csv_parse
+    MecabTweetJob.perform_later
+    flash.notice = 'CSVを開始しました。実行経過はコンソールを見てね。'
+    redirect_to root_path
+  end
+
   private
 
   def set_client

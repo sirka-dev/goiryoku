@@ -4,11 +4,13 @@ require 'moji'
 class MecabTweetJob < ApplicationJob
   queue_as :default
 
-  def perform(*args)
+  def perform(count = nil)
     mecab = Natto::MeCab.new(dicdir: '/usr/local/lib/mecab/dic/mecab-ipadic-neologd')
 
     csv_data = CSV.read("#{Rails.root}/public/tweet.csv")
-    csv_data.take(1000).each do |data|
+    count = csv_data.count if count.nil?
+
+    csv_data.take(count).each do |data|
       next if data[2] =~ /^(@|RT )/
 
       text = normalize_neologd(data[2])
