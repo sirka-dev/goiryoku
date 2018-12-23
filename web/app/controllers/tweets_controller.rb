@@ -43,10 +43,10 @@ class TweetsController < ApplicationController
   end
 
   def calc(tweets)
-    goiryoku = {}
+    goiryoku = { count: tweets.size }
     Tweet::WORD_CLASS.each do |column|
       sum = tweets.sum(column)
-      goiryoku[column] = { average: (sum / tweets.size.to_f).round(2), sum: sum, count: tweets.size }
+      goiryoku[column] = { average: (sum / tweets.size.to_f).round(2), sum: sum }
     end
 
     goiryoku

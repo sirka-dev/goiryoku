@@ -37,5 +37,6 @@ module App
     end
 
     config.active_job.queue_adapter = :delayed_job
+    config.i18n.default_locale = :ja
   end
 end
