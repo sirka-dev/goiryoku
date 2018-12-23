@@ -8,7 +8,7 @@ class TweetsController < ApplicationController
   end
 
   def goiryoku
-    tweet_wartime = Tweet.where(tweeted_at: Live.all.map { |live| live.start..live.end }).select(Tweet::WORD_CLASS)
+    tweet_wartime = Tweet.where(tweeted_at: Live.all.map { |live| live.start + 18.hours..live.end + 26.hours }).select(Tweet::WORD_CLASS)
     @goiryoku_wartime = calc(tweet_wartime)
 
     tweet_peacetime = Tweet.where.not(id: tweet_wartime.ids).select(Tweet::WORD_CLASS)
