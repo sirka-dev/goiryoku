@@ -1,6 +1,8 @@
 # README
 
-## build
+Twitterのつぶやきを元にライブ後の語彙力低下度っぽいものを調べます。
+
+## 環境構築
 
 1. `docker-compose build`
 2. `docker-compose up -d`
