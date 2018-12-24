@@ -4,7 +4,7 @@ class TweetsController < ApplicationController
   before_action :set_client, only: [:index]
 
   def index
-    @tweets = Tweet.all
+    @tweets = Tweet.page(params[:page])
   end
 
   def csv_parse

@@ -1,1 +1,37 @@
-= render partial: 'table', locals: { tweets: @tweets }
+.d-flex.justify-content-end.mb-2
+  = link_to 'CSV読み込み', tweets_csv_parse_path, class: "btn btn-primary"
+
+table.table
+  thead
+    tr
+      th TwitterID
+      th 投稿日
+      th つぶやき
+      th 長さ
+      th 動詞
+      th 形容詞
+      th 名詞
+      th 連体詞
+      th 副詞
+      th 接続詞
+      th 記号
+      th その他
+      th 品詞合計
+  tbody
+    - @tweets.each do |tweet|
+      tr
+        td = tweet.tweet_id
+        td = tweet.tweeted_at
+        td = truncate(tweet.text, length: 15)
+        td = tweet.length
+        td = tweet.verb
+        td = tweet.adjective
+        td = tweet.noun
+        td = tweet.pre_noun
+        td = tweet.adverb
+        td = tweet.conj
+        td = tweet.symbol
+        td = tweet.other
+        td = tweet.word_total
+
+= paginate @tweets
