@@ -1,5 +1,5 @@
 doctype html
-html
+html lang="ja"
   head
     title
       | 語彙力低下ちぇっかー
@@ -8,6 +8,11 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    meta http-equiv="content-language" content="ja"
   body
     .container
-      = yield
+      = render 'layouts/header'
+      - flash.each do |_k, value|
+        = content_tag :div, value, class: "alert alert-info"
+      main
+        = yield
