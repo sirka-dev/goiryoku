@@ -6,7 +6,7 @@ ENV APP_ROOT /app
 RUN mkdir $APP_ROOT
 WORKDIR $APP_ROOT
 
-COPY Gemfile* ${APP_ROOT}/
+ADD Gemfile* ${APP_ROOT}/
 
 RUN apk upgrade --no-cache && \
     apk add --update --no-cache \
@@ -42,4 +42,4 @@ RUN apk upgrade --no-cache && \
     apk del build-dependencies && \
     rm -rf /tmp/mecab*
 
-COPY . $APP_ROOT
+ADD . $APP_ROOT
