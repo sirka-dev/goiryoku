@@ -10,12 +10,13 @@ class MecabTweetJob < ApplicationJob
     csv_data = CSV.read("#{Rails.root}/public/tweet.csv")
     count = csv_data.count if count.nil?
 
+    tweets = []
     csv_data.take(count).each do |data|
       next if data[2] =~ /^(@|RT )/
 
+      tweet = Tweet.new(tweet_id: data[0], tweeted_at: DateTime.strptime(data[1]+' +09:00', '%y%m%d %H%M%S %z'), text: data[2], length: text.length)
+      
       text = normalize_neologd(data[2])
-      tweet = Tweet.new(tweet_id: data[0], tweeted_at: DateTime.strptime(data[1]+' +09:00', '%y%m%d %H%M%S %z'), text: text, length: text.length)
-
       mecab.enum_parse(text).each do |node|
         break if node.is_eos?
 
@@ -33,8 +34,10 @@ class MecabTweetJob < ApplicationJob
         tweet.word_total += 1
       end
 
-      tweet.save
+      tweets << tweet
     end
+
+    Tweet.import tweets
   end
 
   def normalize_neologd(norm)
