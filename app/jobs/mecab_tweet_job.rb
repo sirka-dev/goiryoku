@@ -4,17 +4,18 @@ require 'moji'
 class MecabTweetJob < ApplicationJob
   queue_as :default
 
-  def perform(count = nil)
+  # countは将来的に使う予定
+  def perform(file_path, count = nil)
     mecab = Natto::MeCab.new(dicdir: '/usr/local/lib/mecab/dic/mecab-ipadic-neologd')
 
-    csv_data = CSV.read("#{Rails.root}/public/tweet.csv")
+    csv_data = CSV.read(file_path)
     count = csv_data.count if count.nil?
 
     tweets = []
     csv_data.take(count).each do |data|
       next if data[2] =~ /^(@|RT )/
 
-      tweet = Tweet.new(tweet_id: data[0], tweeted_at: DateTime.strptime(data[1]+' +09:00', '%y%m%d %H%M%S %z'), text: data[2], length: text.length)
+      tweet = Tweet.new(tweet_id: data[0], tweeted_at: DateTime.strptime(data[1]+' +09:00', '%y%m%d %H%M%S %z'), text: data[2], length: data[2].length)
       
       text = normalize_neologd(data[2])
       mecab.enum_parse(text).each do |node|
@@ -38,6 +39,8 @@ class MecabTweetJob < ApplicationJob
     end
 
     Tweet.import tweets
+
+    File.delete(file_path)
   end
 
   def normalize_neologd(norm)

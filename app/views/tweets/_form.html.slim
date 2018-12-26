@@ -1,0 +1,6 @@
+= form_tag import_tweets_path, method: :post, multipart: true
+  .form-inline.mb-2.row
+    .col-9
+      = file_field_tag :file
+    .col-3.text-center
+      = submit_tag "CSV読み込み", class: "btn btn-sm btn-primary"

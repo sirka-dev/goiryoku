@@ -7,9 +7,22 @@ class TweetsController < ApplicationController
     @tweets = Tweet.page(params[:page])
   end
 
-  def csv_parse
-    MecabTweetJob.perform_later
-    flash.notice = 'CSVの取り込みを開始しました'
+  def import
+    puts params[:file]
+
+    file = params[:file]
+
+    if file.blank? || File.extname(file.original_filename).downcase != '.csv'
+      flash.notice = 'CSVファイルを選択して下さい。'
+      redirect_to tweets_path
+      return
+    end
+
+    tmp_file = "tmp/csv/#{SecureRandom.uuid}.csv"
+    File.open(tmp_file, "wb"){ |f| f.write(file.read) }
+    MecabTweetJob.perform_later(tmp_file)
+
+    flash.notice = 'CSVの取り込みを開始しました。しばらくお待ち下さい。'
     redirect_to root_path
   end
 
